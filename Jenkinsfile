@@ -9,7 +9,7 @@ pipeline {
     stage('Clone') {
       steps {
         git([url: 'https://github.com/Sandy7894/own-public.git', branch: 'main', credentialsId: 'ismailyenigul-github-user-token'])
-
+        sh "ls -latr"
       }
     }
     stage('Image Build') {
