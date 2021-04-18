@@ -15,7 +15,10 @@ pipeline {
     stage('Image Build') {
       steps{
         script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+		  sh "cd own-plublic"
+		  sh "docker build -t testim ."
+		  sh "docker images"
+          dockerImage = testim + ":$BUILD_NUMBER"
         }
       }
     }
