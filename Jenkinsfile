@@ -28,6 +28,13 @@ pipeline {
         }
       }
     }
-
+    stage('create container') {
+      steps{
+        script {
+          sh 'docker pull $dockerImage:latest'
+          sh 'docker run -d $dockerImage:latest'
+        }
+      }
   }
+ } 
 }
