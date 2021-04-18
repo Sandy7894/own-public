@@ -9,13 +9,11 @@ pipeline {
     stage('Clone') {
       steps {
         git([url: 'https://github.com/Sandy7894/own-public.git', branch: 'main', credentialsId: 'ismailyenigul-github-user-token'])
-        sh "ls -latr"
       }
     }
     stage('Image Build') {
       steps{
         script {
-		  sh "cd own-plublic"
 		  sh "docker build -t testim ."
 		  sh "docker images"
           dockerImage = testim + ":$BUILD_NUMBER"
