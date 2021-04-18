@@ -4,7 +4,7 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
   }
-  agent {label 'docker-slave'}
+  agent any
   stages {
     stage('Clone') {
       steps {
