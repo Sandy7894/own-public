@@ -14,9 +14,9 @@ pipeline {
     stage('Image Build') {
       steps{
         script {
-		  sh "docker build -t testim ."
-		  sh "docker images"
-          dockerImage = testim + ":$BUILD_NUMBER"
+		  #sh "docker build -t testim ."
+		  #sh "docker images"
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
