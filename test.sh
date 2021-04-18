@@ -4,7 +4,7 @@
 touch inputfile && chmod 755 inputfile
 >inputFile
 
-printf "Date \t\t\t\t BitCoin current price\n"  >> inputfile
+#printf "Date \t\t\t\t BitCoin current price\n"  >> inputfile
 
 while true;
 do
@@ -12,7 +12,7 @@ do
 	curPrice=`curl -k -s https://api.coindesk.com/v1/bpi/currentprice.json | jq -r ".bpi.USD.rate"`
 	#Printing the data to a file
 
-	echo -e "${date}\t ${curPrice}" >> inputfile
+	echo -e "${date}\t ${curPrice}"
 	sleep 1;
 done
 
