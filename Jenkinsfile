@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Clone') {
       steps {
-        git([url: 'https://github.com/Sandy7894/own-public.git', branch: 'main', credentialsId: 'ismailyenigul-github-user-token'])
+        git([url: 'https://github.com/Sandy7894/own-public.git', branch: 'main'])
       }
     }
     stage('Image Build') {
@@ -28,13 +28,5 @@ pipeline {
         }
       }
     }
-    stage('create container') {
-      steps{
-        script {
-          sh 'docker pull $dockerImage:latest'
-          sh 'docker run -d $dockerImage:latest'
-        }
-      }
-  }
  } 
 }
