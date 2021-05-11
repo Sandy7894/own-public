@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: stateful
+spec:
+  selector:
+    matchLabels:
+      app: stateful
+  serviceName: stateful-svc
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: stateful
+    spec:
+      initContainers:
+      - name: init-stateful
+        image: sandeep7894/jfrog:latest
+        command:
+        - bash
+        - "-c"
+        - |
+          cp ./artefactory/artefact.txt /data
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      containers:
+      - name: stateful
+        image: ubuntu:latest
+        command: ['tail', '-f', '/data/artefact.txt']
+        volumeMounts:
+          - mountPath: /data
+            name: data
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: manual
+      resources:
+        requests:
+          storage: 1Gi
+      selector:
+        matchLabels:
+          type: local
+   
+
+        
