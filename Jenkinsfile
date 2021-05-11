@@ -1,7 +1,7 @@
 pipeline {
   environment {
-    registry = "sandeep7894/harbor-dbs"
-    registryCredential = 'dockerhub'
+    registry = "sandeep7894/jfrog"
+    registryCredential = 'Sanhub'
     dockerImage = ''
   }
   agent any
