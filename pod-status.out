@@ -1,0 +1,2 @@
+NAME         READY   STATUS    RESTARTS   AGE
+stateful-0   1/1     Running   0          13m

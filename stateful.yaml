@@ -20,6 +20,7 @@ spec:
         - bash
         - "-c"
         - |
+          ./jfrog.sh
           cp ./artefactory/artefact.txt /data
         volumeMounts:
         - name: data
@@ -39,10 +40,7 @@ spec:
       storageClassName: manual
       resources:
         requests:
-          storage: 1Gi
+          storage: 5Gi
       selector:
         matchLabels:
           type: local
-   
-
-        
