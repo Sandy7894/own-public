@@ -1,0 +1,153 @@
+Started by GitHub push by Sandy7894
+Obtained Jenkinsfile from git https://github.com/Sandy7894/own-public.git
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/docker-build
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/docker-build/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Sandy7894/own-public.git # timeout=10
+Fetching upstream changes from https://github.com/Sandy7894/own-public.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.20.1'
+ > git fetch --tags --force --progress -- https://github.com/Sandy7894/own-public.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 9a95feda3a2049f1e83720bc5a83dea8d0d1c809 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 9a95feda3a2049f1e83720bc5a83dea8d0d1c809 # timeout=10
+Commit message: "Merge branch 'main' of https://github.com/Sandy7894/own-public into main"
+ > git rev-list --no-walk ec421f994619e35e584c696778f6cdeaf4a5bcba # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Clone)
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/docker-build/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Sandy7894/own-public.git # timeout=10
+Fetching upstream changes from https://github.com/Sandy7894/own-public.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.20.1'
+ > git fetch --tags --force --progress -- https://github.com/Sandy7894/own-public.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 9a95feda3a2049f1e83720bc5a83dea8d0d1c809 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 9a95feda3a2049f1e83720bc5a83dea8d0d1c809 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D main # timeout=10
+ > git checkout -b main 9a95feda3a2049f1e83720bc5a83dea8d0d1c809 # timeout=10
+Commit message: "Merge branch 'main' of https://github.com/Sandy7894/own-public into main"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Image Build)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] sh
++ docker build -t sandeep7894/jfrog:3 .
+Sending build context to Docker daemon  139.8kB
+
+Step 1/5 : FROM ubuntu:latest
+ ---> 7e0aa2d69a15
+Step 2/5 : RUN apt-get update &&     apt-get install jq -y &&     apt-get install curl -y
+ ---> Using cache
+ ---> 0ebdc32037e6
+Step 3/5 : COPY ./jfrog.sh .
+ ---> Using cache
+ ---> 137abe42f4f1
+Step 4/5 : RUN chmod +x /jfrog.sh
+ ---> Using cache
+ ---> a10df28f10aa
+Step 5/5 : ENTRYPOINT ["/jfrog.sh"]
+ ---> Using cache
+ ---> 0c61049e68d6
+Successfully built 0c61049e68d6
+Successfully tagged sandeep7894/jfrog:3
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (PUSH Image)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withDockerRegistry
+$ docker login -u sandeep7894 -p ******** https://index.docker.io/v1/
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /var/jenkins_home/workspace/docker-build@tmp/83f52285-4246-4e9d-975b-6909c3690cb9/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] sh
++ docker tag sandeep7894/jfrog:3 sandeep7894/jfrog:3
+[Pipeline] isUnix
+[Pipeline] sh
++ docker push sandeep7894/jfrog:3
+The push refers to repository [docker.io/sandeep7894/jfrog]
+5d80b81b3534: Preparing
+5d80b81b3534: Preparing
+ca1af08e4f29: Preparing
+2f140462f3bc: Preparing
+63c99163f472: Preparing
+ccdbb80308cc: Preparing
+2f140462f3bc: Layer already exists
+63c99163f472: Layer already exists
+ca1af08e4f29: Layer already exists
+5d80b81b3534: Layer already exists
+ccdbb80308cc: Layer already exists
+3: digest: sha256:4f8813535647e4f22d3dd10df77d206dd5952b3abcbdde3fce909002d4611422 size: 1569
+[Pipeline] isUnix
+[Pipeline] sh
++ docker tag sandeep7894/jfrog:3 sandeep7894/jfrog:latest
+[Pipeline] isUnix
+[Pipeline] sh
++ docker push sandeep7894/jfrog:latest
+The push refers to repository [docker.io/sandeep7894/jfrog]
+5d80b81b3534: Preparing
+5d80b81b3534: Preparing
+ca1af08e4f29: Preparing
+2f140462f3bc: Preparing
+63c99163f472: Preparing
+ccdbb80308cc: Preparing
+5d80b81b3534: Layer already exists
+2f140462f3bc: Layer already exists
+ca1af08e4f29: Layer already exists
+ccdbb80308cc: Layer already exists
+63c99163f472: Layer already exists
+latest: digest: sha256:4f8813535647e4f22d3dd10df77d206dd5952b3abcbdde3fce909002d4611422 size: 1569
+[Pipeline] }
+[Pipeline] // withDockerRegistry
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

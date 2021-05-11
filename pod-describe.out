@@ -1,0 +1,88 @@
+Name:         stateful-0
+Namespace:    default
+Priority:     0
+Node:         node01/172.17.0.23
+Start Time:   Tue, 11 May 2021 11:30:45 +0000
+Labels:       app=stateful
+              controller-revision-hash=stateful-7978c6c4fb
+              statefulset.kubernetes.io/pod-name=stateful-0
+Annotations:  <none>
+Status:       Running
+IP:           10.244.1.5
+IPs:
+  IP:           10.244.1.5
+Controlled By:  StatefulSet/stateful
+Init Containers:
+  init-stateful:
+    Container ID:  docker://67f5de19b1af4c2a203fea200543e8f6dd171f1bfb954e27382afd2c2e67025b
+    Image:         sandeep7894/jfrog:latest
+    Image ID:      docker-pullable://sandeep7894/jfrog@sha256:903111d457b8b881dc43fd4bc07b7c35bdbb5584c2cfe0e9f76f77080f28121d
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      bash
+      -c
+      ./jfrog.sh
+      cp ./artefactory/artefact.txt /data
+      
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Tue, 11 May 2021 11:30:46 +0000
+      Finished:     Tue, 11 May 2021 11:30:46 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /data from data (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-csm7b (ro)
+Containers:
+  stateful:
+    Container ID:  docker://0f9156041631a5e2f0031f2e59741fd370491bf928f176496676c3d79c9e799c
+    Image:         ubuntu:latest
+    Image ID:      docker-pullable://ubuntu@sha256:cf31af331f38d1d7158470e095b132acd126a7180a54f263d386da88eb681d93
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      tail
+      -f
+      /data/artefact.txt
+    State:          Running
+      Started:      Tue, 11 May 2021 11:30:48 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /data from data (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-csm7b (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  data:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  data-stateful-0
+    ReadOnly:   false
+  default-token-csm7b:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-csm7b
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  14m   default-scheduler  Successfully assigned default/stateful-0 to node01
+  Normal  Pulling    14m   kubelet            Pulling image "sandeep7894/jfrog:latest"
+  Normal  Pulled     14m   kubelet            Successfully pulled image "sandeep7894/jfrog:latest" in 586.28765ms
+  Normal  Created    14m   kubelet            Created container init-stateful
+  Normal  Started    14m   kubelet            Started container init-stateful
+  Normal  Pulling    14m   kubelet            Pulling image "ubuntu:latest"
+  Normal  Pulled     14m   kubelet            Successfully pulled image "ubuntu:latest" in 651.90663ms
+  Normal  Created    14m   kubelet            Created container stateful
+  Normal  Started    14m   kubelet            Started container stateful
