@@ -1,0 +1,12 @@
+START RequestId: 8a9c5752-e414-41c7-ba80-dc891df66b30 Version: $LATEST
+Working for volume with volume_id:  vol-0fb1ec04310ebbfda
+State of volume:  in-use
+Attachment state length:  1
+[{'AttachTime': datetime.datetime(2021, 5, 11, 5, 50, 41, tzinfo=tzlocal()), 'Device': '/dev/sda1', 'InstanceId': 'i-0511825230afee27f', 'State': 'attached', 'VolumeId': 'vol-0fb1ec04310ebbfda', 'DeleteOnTermination': True}]
+--------------------------------------------
+Working for volume with volume_id:  vol-0f6cd4f60cb6e7847
+State of volume:  available
+Attachment state length:  0
+[]
+--------------------------------------------
+['vol-0f6cd4f60cb6e7847']
